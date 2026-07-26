@@ -1,0 +1,60 @@
+body {
+    /* background is provided by the <img class="site-bg"> element */
+    margin: 0;                          /* remove default body margin */
+    min-height: 100vh;                 /* ensure it fills the viewport */
+}
+
+/* Slightly darker overlay for better contrast */
+body.has-overlay::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6); /* slightly darker overlay (updated to 0.6) */
+    pointer-events: none;
+    z-index: -1; /* sits above the background image but below content */
+}
+
+/* Use the PNG file itself as a background element so the image is accessible/copyable.
+     .site-bg is placed behind all content and sized to cover the viewport.
+*/
+.site-bg {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover; /* scale to cover */
+    object-position: center center; /* focus center of image */
+    z-index: -2;       /* behind overlay and page content */
+}
+
+/* Small screens: ensure background covers properly */
+@media (max-width:480px) {
+    .site-bg { object-position: center top; }
+}
+
+/* Ensure page content sits above the overlay and background */
+.page-content {
+    position: relative;
+    z-index: 0;
+    min-height: 100vh;           /* full viewport so content can be vertically centered */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;     /* vertical center */
+    align-items: center;         /* horizontal center */
+    text-align: center;
+    padding: 2rem;               /* breathing room so content isn't at the edges */
+}
+
+/* Social icon group: centered and spaced with a small top margin */
+.social {
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    align-items:center;
+    margin-top:1.5rem;
+}
+.social img { display:block; }
